@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Review Shop</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">📚 Book Review Shop</div>
+            <div class="nav-links">
+                <a href="#" onclick="showHome(); return false;" class="nav-link active">Home</a>
+                <div id="auth-buttons" class="auth-buttons">
+                    <button class="btn-login" onclick="showLoginModal()">Login</button>
+                    <button class="btn-register" onclick="showRegisterModal()">Register</button>
+                </div>
+                <div id="user-menu" class="user-menu" style="display: none;">
+                    <span id="username-display"></span>
+                    <button class="btn-logout" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <h1>Welcome to Book Review Shop</h1>
+            <p class="subtitle">Discover, Search, and Review Books</p>
+            
+            <div class="search-container">
+                <div class="search-card">
+                    <h3>Search Books</h3>
+                    <div class="search-options">
+                        <button class="btn-search-type active" onclick="switchSearch('all')">All Books</button>
+                        <button class="btn-search-type" onclick="switchSearch('isbn')">By ISBN</button>
+                        <button class="btn-search-type" onclick="switchSearch('author')">By Author</button>
+                        <button class="btn-search-type" onclick="switchSearch('title')">By Title</button>
+                    </div>
+
+                    <div id="search-all" class="search-form active">
+                        <button class="btn btn-primary" onclick="loadAllBooks()">Load All Books</button>
+                    </div>
+
+                    <div id="search-isbn" class="search-form">
+                        <input type="text" id="isbn-input" placeholder="Enter ISBN" class="input-field">
+                        <button class="btn btn-primary" onclick="searchByISBN()">Search</button>
+                    </div>
+
+                    <div id="search-author" class="search-form">
+                        <input type="text" id="author-input" placeholder="Enter Author Name" class="input-field">
+                        <button class="btn btn-primary" onclick="searchByAuthor()">Search</button>
+                    </div>
+
+                    <div id="search-title" class="search-form">
+                        <input type="text" id="title-input" placeholder="Enter Book Title" class="input-field">
+                        <button class="btn btn-primary" onclick="searchByTitle()">Search</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Books Display -->
+            <div id="books-container" class="books-container">
+                <div class="loading">Search for books to get started...</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <h2>Login</h2>
+            <form onsubmit="handleLogin(event)">
+                <input type="text" id="login-username" placeholder="Username" required class="input-field">
+                <input type="password" id="login-password" placeholder="Password" required class="input-field">
+                <button type="submit" class="btn btn-primary">Login</button>
+                <p class="modal-text">Don't have an account? <a href="#" onclick="switchToRegister()">Register here</a></p>
+            </form>
+            <div id="login-error" class="error-message"></div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeRegisterModal()">&times;</span>
+            <h2>Register</h2>
+            <form onsubmit="handleRegister(event)">
+                <input type="text" id="register-username" placeholder="Username" required class="input-field">
+                <input type="password" id="register-password" placeholder="Password" required class="input-field">
+                <input type="password" id="register-password-confirm" placeholder="Confirm Password" required class="input-field">
+                <button type="submit" class="btn btn-primary">Register</button>
+                <p class="modal-text">Already have an account? <a href="#" onclick="switchToLogin()">Login here</a></p>
+            </form>
+            <div id="register-error" class="error-message"></div>
+        </div>
+    </div>
+
+    <!-- Review Modal -->
+    <div id="reviewModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeReviewModal()">&times;</span>
+            <h2 id="review-modal-title">Add Review</h2>
+            <form onsubmit="handleAddReview(event)">
+                <textarea id="review-text" placeholder="Write your review..." required class="input-field" rows="5"></textarea>
+                <button type="submit" class="btn btn-primary">Submit Review</button>
+            </form>
+            <div id="review-error" class="error-message"></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Book Review Shop. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
